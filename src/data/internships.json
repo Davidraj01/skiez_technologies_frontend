@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "title": "UI/UX Design Intern",
+    "location": "Remote / Hybrid",
+    "duration": "2–3 Months",
+    "stipend": "₹3,000 – ₹7,000",
+    "shortDescription": "Work with the design team to create intuitive, modern, and user-friendly interfaces for web and mobile applications.",
+    "fullDescription": "We’re seeking a creative UI/UX Design Intern passionate about crafting exceptional digital experiences. You’ll collaborate with our product and engineering teams to design wireframes, prototypes, and final UIs that are both visually appealing and easy to use.",
+    "responsibilities": [
+      "Assist in designing web and mobile app interfaces using Figma or Adobe XD.",
+      "Collaborate with developers to ensure design consistency and responsiveness.",
+      "Conduct user research and usability testing to refine design solutions.",
+      "Contribute creative ideas during brainstorming sessions.",
+      "Stay updated with modern design trends and UX principles."
+    ],
+    "requirements": [
+      "Basic understanding of design tools like Figma, Adobe XD, or Sketch.",
+      "Strong attention to detail and visual aesthetics.",
+      "Ability to turn ideas into practical design solutions.",
+      "Good communication and collaboration skills.",
+      "A portfolio or sample work will be an added advantage."
+    ],
+    "bonusPoints": [
+      "Knowledge of HTML/CSS basics.",
+      "Interest in motion design or micro-interactions."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "MERN Stack Development Intern",
+    "location": "Remote / On-site",
+    "duration": "3–6 Months",
+    "stipend": "₹5,000 – ₹10,000",
+    "shortDescription": "Learn and build real-world projects using MongoDB, Express.js, React, and Node.js under industry guidance.",
+    "fullDescription": "Join our development team as a MERN Stack Intern and gain hands-on experience in full-stack web development. You’ll work on live projects, understand backend–frontend integration, and learn industry practices for scalable, maintainable code.",
+    "responsibilities": [
+      "Assist in building dynamic web applications using the MERN stack.",
+      "Collaborate with senior developers to write efficient and clean code.",
+      "Work on REST APIs, authentication, and CRUD operations.",
+      "Fix bugs and optimize performance in existing applications.",
+      "Participate in daily stand-ups and code reviews."
+    ],
+    "requirements": [
+      "Basic understanding of HTML, CSS, JavaScript, and React.js.",
+      "Familiarity with Node.js, Express, and MongoDB.",
+      "Eagerness to learn new technologies and frameworks.",
+      "Ability to work both independently and in a team environment.",
+      "Strong debugging and logical problem-solving skills."
+    ],
+    "bonusPoints": [
+      "Experience with Git and GitHub.",
+      "Knowledge of Tailwind CSS or Bootstrap."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Digital Marketing Intern",
+    "location": "Remote / Hybrid",
+    "duration": "2–3 Months",
+    "stipend": "₹3,000 – ₹6,000",
+    "shortDescription": "Gain hands-on experience in SEO, content marketing, and social media campaigns to boost brand visibility and engagement.",
+    "fullDescription": "We are looking for an energetic Digital Marketing Intern to join our marketing team. You’ll assist in planning and executing online marketing campaigns, optimizing website performance, and managing social media content to grow our brand presence.",
+    "responsibilities": [
+      "Assist in managing and scheduling social media posts across platforms.",
+      "Conduct keyword research and support SEO activities.",
+      "Analyze website traffic and prepare performance reports.",
+      "Create engaging content for blogs, reels, and newsletters.",
+      "Support online campaigns and promotional strategies."
+    ],
+    "requirements": [
+      "Basic understanding of digital marketing concepts (SEO, SEM, social media).",
+      "Good communication and creative thinking skills.",
+      "Familiarity with social media tools like Meta Business Suite or Buffer.",
+      "Strong desire to learn marketing analytics and content creation.",
+      "Ability to meet deadlines and multitask efficiently."
+    ],
+    "bonusPoints": [
+      "Experience using Canva or Adobe Creative Suite.",
+      "Knowledge of Google Analytics and SEO tools."
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Flutter Development Intern",
+    "location": "Remote / Hybrid",
+    "duration": "3–6 Months",
+    "stipend": "₹5,000 – ₹9,000",
+    "shortDescription": "Work on cross-platform mobile apps using Flutter and Dart while learning modern mobile development practices.",
+    "fullDescription": "We are offering an internship opportunity for aspiring Flutter developers to build production-level mobile apps. You’ll work alongside mentors to create UI components, connect APIs, and deliver seamless app experiences across Android and iOS.",
+    "responsibilities": [
+      "Assist in building mobile applications using Flutter and Dart.",
+      "Collaborate with the design and backend teams to implement new features.",
+      "Test and debug code to ensure smooth performance.",
+      "Learn and apply best practices for app architecture and state management.",
+      "Participate in code reviews and product testing sessions."
+    ],
+    "requirements": [
+      "Basic understanding of Flutter, Dart, and mobile UI design principles.",
+      "Knowledge of APIs and JSON integration.",
+      "Good problem-solving and analytical thinking skills.",
+      "Eagerness to learn new frameworks and technologies.",
+      "Strong commitment to deadlines and quality work."
+    ],
+    "bonusPoints": [
+      "Experience with Firebase or local databases.",
+      "Understanding of Git and version control basics."
+    ]
+  }
+]

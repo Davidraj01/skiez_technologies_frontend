@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "title": "Full Stack Web Development Trainee Program",
+    "location": "Hybrid / Remote",
+    "duration": "6 Months",
+    "fee": "₹25,000",
+    "shortDescription": "Master front-end and back-end web development with hands-on projects and industry-level guidance.",
+    "fullDescription": "The Full Stack Web Development Trainee Program is designed to help you become a professional MERN stack developer. You’ll learn to build dynamic web applications using MongoDB, Express.js, React, and Node.js through guided mentorship, live projects, and assessments.",
+    "responsibilities": [
+      "Learn front-end technologies: HTML, CSS, JavaScript, and React.",
+      "Develop back-end services using Node.js, Express, and MongoDB.",
+      "Work on full-fledged projects to strengthen your portfolio.",
+      "Participate in weekly code reviews and mentoring sessions.",
+      "Understand deployment and version control using Git and GitHub."
+    ],
+    "requirements": [
+      "Basic understanding of web technologies.",
+      "Passion for coding and web development.",
+      "Good problem-solving and logical thinking skills.",
+      "Willingness to learn and work on real-world projects.",
+      "Laptop or PC with a stable internet connection."
+    ],
+    "bonusPoints": [
+      "Prior experience with any programming language.",
+      "Familiarity with Tailwind CSS or Bootstrap."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "UI/UX Design Trainee Program",
+    "location": "Remote / Hybrid",
+    "duration": "6 Months",
+    "fee": "₹25,000",
+    "shortDescription": "Learn how to design user-centric digital products through hands-on projects and design challenges.",
+    "fullDescription": "This UI/UX Design Trainee Program focuses on mastering user experience principles and design systems. You’ll work on real design briefs, build wireframes, create interactive prototypes, and collaborate with developers to understand the product lifecycle.",
+    "responsibilities": [
+      "Understand design principles, color theory, and typography.",
+      "Learn to create wireframes, prototypes, and UI mockups using Figma.",
+      "Conduct user research and usability testing.",
+      "Work on live design projects and case studies.",
+      "Build a professional design portfolio by the end of the program."
+    ],
+    "requirements": [
+      "Basic knowledge of digital tools like Figma or Adobe XD.",
+      "Creative mindset with an eye for detail.",
+      "Good communication and presentation skills.",
+      "Willingness to accept feedback and improve designs."
+    ],
+    "bonusPoints": [
+      "Experience with motion design or animations.",
+      "Understanding of HTML and CSS for design handoff."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Digital Marketing Trainee Program",
+    "location": "Remote / On-site",
+    "duration": "6 Months",
+    "fee": "₹15,000",
+    "shortDescription": "Gain practical experience in SEO, social media marketing, and performance analytics for online growth.",
+    "fullDescription": "The Digital Marketing Trainee Program offers complete exposure to real-world digital marketing tools and strategies. You’ll learn how to plan, execute, and analyze marketing campaigns that drive traffic and conversions for brands.",
+    "responsibilities": [
+      "Learn and apply SEO and SEM techniques.",
+      "Work on live social media campaigns and ads.",
+      "Create marketing reports using analytics tools.",
+      "Assist in content creation and keyword research.",
+      "Develop marketing strategies for real clients or projects."
+    ],
+    "requirements": [
+      "Basic knowledge of marketing and social media platforms.",
+      "Strong communication and creative writing skills.",
+      "Interest in learning analytics and ad optimization.",
+      "Ability to think strategically and deliver results."
+    ],
+    "bonusPoints": [
+      "Experience using Canva, Google Ads, or Meta Ads Manager.",
+      "Knowledge of SEO tools like Ahrefs or SEMrush."
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Mobile App Development Trainee Program (Flutter)",
+    "location": "Hybrid / Remote",
+    "duration": "6 Months",
+    "fee": "₹25,000",
+    "shortDescription": "Build modern, cross-platform mobile apps using Flutter and Dart with hands-on mentorship.",
+    "fullDescription": "This Flutter Development Trainee Program will help you learn mobile app development from scratch. You’ll design UIs, manage app states, connect APIs, and deploy real apps on Play Store under professional guidance.",
+    "responsibilities": [
+      "Learn Flutter and Dart fundamentals.",
+      "Build UI components and navigation flows.",
+      "Connect apps with APIs and handle data.",
+      "Test and debug mobile applications.",
+      "Participate in project reviews and mentorship sessions."
+    ],
+    "requirements": [
+      "Basic understanding of programming concepts.",
+      "Interest in mobile app development.",
+      "Commitment to complete the training modules and projects.",
+      "Laptop with Android Studio or VS Code installed."
+    ],
+    "bonusPoints": [
+      "Knowledge of Firebase or REST APIs.",
+      "Experience using Git and version control."
+    ]
+  }
+]

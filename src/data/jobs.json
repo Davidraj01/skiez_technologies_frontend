@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Flutter Developer",
+    "location": "On-site",
+    "type": "Full-time",
+    "salary": "₹14,000 – ₹20,000",
+    "shortDescription": "Build beautiful, high-performance mobile apps for Android and iOS using Flutter and Dart.",
+    "fullDescription": "We are seeking a skilled Flutter Developer to join our growing engineering team. You’ll be responsible for developing clean, responsive, and scalable mobile applications. Collaborating with designers and backend engineers, you’ll turn product ideas into smooth, pixel-perfect mobile experiences that delight users.",
+    "responsibilities": [
+      "Develop cross-platform mobile apps using Flutter and Dart.",
+      "Collaborate with backend developers and UI/UX designers for seamless integrations.",
+      "Write clean, maintainable, and efficient code.",
+      "Optimize performance and fix bugs for a smooth user experience.",
+      "Stay updated with the latest Flutter releases and mobile development trends."
+    ],
+    "requirements": [
+      "1–2 years of experience in Flutter app development.",
+      "Strong understanding of Dart, REST APIs, and state management (e.g., Provider, Riverpod, or Bloc).",
+      "Experience with Firebase, push notifications, and app deployment.",
+      "Familiarity with Git and CI/CD workflows.",
+      "Strong debugging and problem-solving skills."
+    ],
+    "bonusPoints": [
+      "Experience publishing apps on Play Store or App Store.",
+      "Understanding of native Android/iOS integrations."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Telemarketing Executive",
+    "location": "On-site",
+    "type": "Full-time",
+    "salary": "₹10,000 – ₹20,000 + Incentives",
+    "shortDescription": "Engage with potential clients over calls and emails to promote our services and generate qualified leads.",
+    "fullDescription": "We are looking for a proactive Telemarketing Executive to join our sales and marketing team. You’ll play a key role in reaching out to potential clients, understanding their needs, and promoting our digital products and services. Your communication skills and enthusiasm will help drive business growth and maintain positive customer relationships.",
+    "responsibilities": [
+      "Make outbound calls to potential clients and introduce company services.",
+      "Follow up on leads generated through marketing campaigns and online inquiries.",
+      "Maintain accurate call and lead records in the CRM system.",
+      "Understand client requirements and schedule meetings for the sales team.",
+      "Achieve weekly and monthly outreach and conversion targets.",
+      "Provide feedback from clients to improve marketing strategies."
+    ],
+    "requirements": [
+      "0–2 years of experience in telemarketing, sales, or customer support.",
+      "Excellent communication and interpersonal skills.",
+      "Ability to handle rejection positively and stay motivated.",
+      "Basic understanding of digital marketing or IT services is a plus.",
+      "Fluency in English and Tamil (additional languages are a bonus)."
+    ],
+    "bonusPoints": [
+      "Experience using CRM tools like HubSpot or Zoho.",
+      "Prior experience in B2B or IT service-based companies."
+    ]
+  }
+]
