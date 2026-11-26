@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
+import { Seo } from "../lib/seo";
 
 /** Skiez Technologies — Terms of Service (Professional Slate-900 Theme) */
 
@@ -19,7 +20,7 @@ const sections = [
 ];
 
 const GlassBadge = ({ children }) => (
-  <span className="inline-flex items-center rounded-md border border-slate-700 bg-slate-800/50 px-2.5 py-0.5 text-xs font-medium text-indigo-300 backdrop-blur-sm">
+  <span className="inline-flex items-center rounded-md border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs font-medium text-navy-700 backdrop-blur-sm">
     {children}
   </span>
 );
@@ -27,9 +28,9 @@ const GlassBadge = ({ children }) => (
 const H2 = ({ id, children }) => (
   <h2
     id={id}
-    className="scroll-mt-28 text-2xl font-bold text-white mt-12 mb-6 flex items-center gap-3"
+    className="scroll-mt-28 text-2xl font-bold text-navy-900 mt-12 mb-6 flex items-center gap-3"
   >
-    <span className="h-8 w-1 bg-indigo-500 rounded-full" />
+    <span className="h-8 w-1 bg-navy-900 rounded-full" />
     {children}
   </h2>
 );
@@ -45,7 +46,7 @@ const BackToTop = () => {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-8 right-8 z-50 rounded-xl bg-indigo-600 p-3 text-white shadow-2xl transition-all hover:bg-indigo-500 hover:-translate-y-1"
+      className="fixed bottom-8 right-8 z-50 rounded-xl bg-navy-900 p-3 text-white shadow-2xl transition-all hover:bg-navy-800 hover:-translate-y-1"
     >
       <svg
         className="w-6 h-6"
@@ -68,17 +69,18 @@ const TermsTechnologies = () => {
   const lastUpdated = useMemo(() => "February 09, 2026", []);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-white text-slate-600">
+      <Seo title="Terms of Service | Skiez Technologies" description="Terms and conditions for using the Skiez Technologies website and services." />
       {/* Hero Header */}
-      <header className="relative overflow-hidden border-b border-slate-800 bg-slate-900/50 py-20">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent opacity-50" />
+      <header className="relative overflow-hidden border-b border-slate-200 bg-slate-50 py-20">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-navy-900/10 via-transparent to-transparent opacity-50" />
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="space-y-4 text-center lg:text-left">
             <GlassBadge>Legal Framework</GlassBadge>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white lg:text-6xl">
-              Terms of <span className="text-indigo-500">Service.</span>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-navy-900 lg:text-6xl">
+              Terms of <span className="text-navy-700">Service.</span>
             </h1>
-            <p className="text-lg text-slate-400 max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0">
               The foundational agreement governing the professional relationship
               between Skiez Technologies and our global clientele.
             </p>
@@ -94,8 +96,8 @@ const TermsTechnologies = () => {
           {/* Sticky Navigation */}
           <aside className="lg:col-span-4 hidden lg:block">
             <div className="lg:sticky lg:top-24 space-y-6">
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 backdrop-blur-md">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-indigo-500 mb-6">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 backdrop-blur-md">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-navy-700 mb-6">
                   Article Sections
                 </h3>
                 <nav className="flex flex-col gap-1">
@@ -103,7 +105,7 @@ const TermsTechnologies = () => {
                     <a
                       key={s.id}
                       href={`#${s.id}`}
-                      className="group flex items-center py-2 text-sm transition-colors hover:text-white"
+                      className="group flex items-center py-2 text-sm transition-colors hover:text-navy-900"
                       onClick={(e) => {
                         e.preventDefault();
                         document
@@ -111,7 +113,7 @@ const TermsTechnologies = () => {
                           ?.scrollIntoView({ behavior: "smooth" });
                       }}
                     >
-                      <span className="mr-3 h-px w-4 bg-slate-700 transition-all group-hover:w-6 group-hover:bg-indigo-500" />
+                      <span className="mr-3 h-px w-4 bg-slate-300 transition-all group-hover:w-6 group-hover:bg-navy-900" />
                       {s.label}
                     </a>
                   ))}
@@ -121,8 +123,8 @@ const TermsTechnologies = () => {
           </aside>
 
           {/* Legal Content */}
-          <article className="lg:col-span-8 prose prose-invert prose-indigo max-w-none">
-            <section className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 mb-12">
+          <article className="lg:col-span-8 prose prose-slate max-w-none">
+            <section className="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-12">
               <p className="m-0 leading-relaxed italic">
                 By engaging Skiez Technologies India Pvt Ltd for any software
                 development, consulting, or technical services, you hereby agree
@@ -166,8 +168,8 @@ const TermsTechnologies = () => {
 
             <H2 id="payments">3. Payments and Invoicing</H2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                <h4 className="text-indigo-400 font-bold mb-2">
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <h4 className="text-navy-700 font-bold mb-2">
                   Milestone Payments
                 </h4>
                 <p className="text-sm">
@@ -175,8 +177,8 @@ const TermsTechnologies = () => {
                   phases (e.g., Design, Beta, Final Release).
                 </p>
               </div>
-              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                <h4 className="text-indigo-400 font-bold mb-2">
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <h4 className="text-navy-700 font-bold mb-2">
                   Service Suspension
                 </h4>
                 <p className="text-sm">
@@ -247,13 +249,13 @@ const TermsTechnologies = () => {
             </p>
 
             <H2 id="contact">13. Contact Information</H2>
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-8 shadow-xl mt-4">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 shadow-xl mt-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <p className="text-xs font-bold uppercase text-indigo-500 mb-1">
+                  <p className="text-xs font-bold uppercase text-navy-700 mb-1">
                     Legal Queries
                   </p>
-                  <p className="text-white font-semibold">
+                  <p className="text-navy-900 font-semibold">
                     Skiez Technologies India Pvt Ltd
                   </p>
                   <p className="text-sm text-slate-500">
@@ -261,10 +263,10 @@ const TermsTechnologies = () => {
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs font-bold uppercase text-indigo-500 mb-1">
+                  <p className="text-xs font-bold uppercase text-navy-700 mb-1">
                     Direct Contact
                   </p>
-                  <p className="text-white">skieztechnologies@gmail.com</p>
+                  <p className="text-navy-900 break-all">skieztechnologies@gmail.com</p>
                   <p className="text-sm text-slate-500">
                     Phone: +91 9444958197
                   </p>
@@ -272,16 +274,16 @@ const TermsTechnologies = () => {
               </div>
             </div>
 
-            <footer className="mt-20 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500 pb-10">
+            <footer className="mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500 pb-10">
               <p>
                 © {new Date().getFullYear()} Skiez Technologies India Pvt Ltd.
                 All Rights Reserved.
               </p>
               <div className="flex gap-6">
-                <a href="#" className="hover:text-indigo-400">
+                <a href="#" className="hover:text-navy-700">
                   Privacy Policy
                 </a>
-                <a href="#" className="hover:text-indigo-400">
+                <a href="#" className="hover:text-navy-700">
                   Compliance
                 </a>
               </div>

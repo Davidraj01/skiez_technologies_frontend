@@ -6,7 +6,25 @@ export default {
   	extend: {
   		colors: {
   			brand: '#1d4ed8',
-  			ink: '#020617',
+  			navy: {
+  				50: '#f0f4fa',
+  				100: '#dce4f2',
+  				200: '#b9c8e3',
+  				300: '#8aa2cc',
+  				400: '#5b7ab0',
+  				500: '#3a5a92',
+  				600: '#284577',
+  				700: '#1c355f',
+  				800: '#142a4d',
+  				900: '#0b1f3a',
+  				950: '#071428'
+  			},
+  			ink: {
+  				DEFAULT: '#020617',
+  				950: '#05070d',
+  				900: '#0a0f1c',
+  				800: '#0e1424'
+  			},
   			paper: '#ffffff',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -54,10 +72,17 @@ export default {
   				'Inter',
   				'system-ui',
   				'sans-serif'
+  			],
+  			display: [
+  				'Plus Jakarta Sans',
+  				'Inter',
+  				'system-ui',
+  				'sans-serif'
   			]
   		},
   		boxShadow: {
-  			soft: '0 12px 40px rgba(2,6,23,0.08)'
+  			soft: '0 12px 40px rgba(2,6,23,0.08)',
+  			glow: '0 0 0 1px rgba(56,189,248,0.15), 0 20px 60px -20px rgba(14,165,233,0.45)'
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

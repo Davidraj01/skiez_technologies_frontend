@@ -2,9 +2,50 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/public/skiez-tech logo.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Skiez Technology</title>
+    <meta name="theme-color" content="#0b1f3a" />
+    <!-- Fonts: preconnect + non-blocking stylesheet (swap) so text paints immediately -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      />
+    </noscript>
+    <style>
+      /* Paint the dark background before JS/CSS bundles arrive (no white flash) */
+      html, body { background: #ffffff; }
+    </style>
+    <title>Skiez Technologies | Web &amp; App Development in Chennai</title>
+    <!-- Defaults for crawlers/social apps that don't run JavaScript; each page updates these at runtime -->
+    <meta
+      name="description"
+      content="Skiez Technologies builds scalable websites, mobile apps and database solutions for E-Commerce, Healthcare, Education, Real Estate and B2B businesses."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Skiez Technologies" />
+    <meta property="og:title" content="Skiez Technologies | Web &amp; App Development in Chennai" />
+    <meta
+      property="og:description"
+      content="Scalable full-stack web, mobile app and database solutions from Skiez Technologies, Chengalpattu / Chennai."
+    />
+    <meta property="og:image" content="https://www.skieztechnologies.org/skiez-tech-logo.webp" />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <div id="root"></div>

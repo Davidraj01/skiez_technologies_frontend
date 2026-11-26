@@ -2,97 +2,41 @@
 import React from "react";
 import { HeroParallax } from "./ui/hero-parallax";
 
-// Import local assets so Vite hashes them correctly for Vercel
-import skiezDigi from "../assets/skiez-digi.png";
-import marineBD from "../assets/marine-BD.png";
-import pdfApp from "../assets/pdf-app.png";
-import taspef from "../assets/taspef.png";
-import davidSecurity from "../assets/DavidSecurity.png";
-import seaTurtle from "../assets/sea-turtle.png";
-import seaTurtle2 from "../assets/sea-turtle2.png";
-import ruspwak from "../assets/ruspwak.png";
-import shalomPlots from "../assets/Shalomplots.png";
+// Import local (optimized) assets so Vite hashes them correctly for Vercel
+import skiezDigi from "../assets/optimized/skiez-digi.webp";
+import marineBD from "../assets/optimized/marine-BD.webp";
+import pdfApp from "../assets/optimized/pdf-app.webp";
+import taspef from "../assets/optimized/taspef.webp";
+import davidSecurity from "../assets/optimized/DavidSecurity.webp";
+import seaTurtle from "../assets/optimized/sea-turtle.webp";
+import ruspwak from "../assets/optimized/ruspwak.webp";
+import shalomPlots from "../assets/optimized/Shalomplots.webp";
+import hopeConstruction from "../assets/optimized/hope-construction.webp";
+import jeevaSchool from "../assets/optimized/jeeva-school.webp";
+import rvrBuilders from "../assets/optimized/rvr-builders.webp";
+import royalMatrimony from "../assets/optimized/royal-matrimony.webp";
+import divineLaundry from "../assets/optimized/divine-laundry.webp";
 
 export function HeroParallaxDemo() {
   return <HeroParallax products={products} />;
 }
 
+// "Our Works" — Skiez client projects.
+// Client website URLs are intentionally NOT included: cards open an on-site
+// preview so visitors stay on the Skiez website.
+// Each project appears exactly once, in this order, in the "Our Works" grid.
 export const products = [
-  {
-    title: "Skiez Digital",
-    link: "https://www.skiezdigital.com/",
-    thumbnail: skiezDigi,
-  },
-  {
-    title: "Marine Biodiversity Conservartion",
-    link: "https://www.marinebiodiversityconservation.com/",
-    thumbnail: marineBD,
-  },
-  {
-    title: "Skiez Digital",
-    link: "https://www.skiezdigital.com/",
-    thumbnail: skiezDigi,
-  },
-  {
-    title: "Skiezpdbooks",
-    link: "https://www.skiezpdfbooks.in/",
-    thumbnail: pdfApp,
-  },
-  {
-    title: "Editrix AI",
-    link: "https://editrix.ai",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/editrix.png",
-  },
-  {
-    title: "TASPEF",
-    link: "https://taspef.org/",
-    thumbnail: taspef,
-  },
-  {
-    title: "David Security",
-    link: "https://www.davidsecurityservices.com/",
-    thumbnail: davidSecurity,
-  },
-  {
-    title: "Sea Turtle Conservation",
-    link: "https://seaturtleconservation.in/",
-    thumbnail: seaTurtle,
-  },
-  {
-    title: "TASPEF",
-    link: "https://taspef.org/",
-    thumbnail: taspef,
-  },
-  {
-    title: "RuspWak",
-    link: "https://ruspwak.org/",
-    thumbnail: ruspwak,
-  },
-  {
-    title: "Renderwork Studio",
-    link: "https://renderwork.studio",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/renderwork.png",
-  },
-  {
-    title: "Shalom Plots",
-    link: "https://www.shalomplots.com/",
-    thumbnail: shalomPlots,
-  },
-  {
-    title: "Sea Turtle Conservation",
-    link: "https://seaturtleconservation.in/",
-    thumbnail: seaTurtle2,
-  },
-  {
-    title: "RuspWak",
-    link: "https://ruspwak.org/",
-    thumbnail: ruspwak,
-  },
-  {
-    title: "Skiezpdbooks",
-    link: "https://www.skiezpdfbooks.in/",
-    thumbnail: pdfApp,
-  },
+  { title: "Hope Construction", thumbnail: hopeConstruction },
+  { title: "Skiez Digital", thumbnail: skiezDigi },
+  { title: "Jeeva Matric School", thumbnail: jeevaSchool },
+  { title: "Marine Biodiversity Conservartion", thumbnail: marineBD },
+  { title: "RVR Builders", thumbnail: rvrBuilders },
+  { title: "Shalom Plots", thumbnail: shalomPlots },
+  { title: "Royal Matrimony", thumbnail: royalMatrimony },
+  { title: "David Security", thumbnail: davidSecurity },
+  { title: "Sea Turtle Conservation", thumbnail: seaTurtle },
+  { title: "Divine Laundry", thumbnail: divineLaundry },
+  { title: "TASPEF", thumbnail: taspef },
+  { title: "RuspWak", thumbnail: ruspwak },
+  { title: "Skiezpdbooks", thumbnail: pdfApp },
 ];

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Loader2, ArrowRight, CalendarDays } from "lucide-react";
 import api from "../lib/api";
+import { Seo, useSeoSettings, breadcrumbSchema } from "../lib/seo";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -10,6 +11,7 @@ const fadeInUp = {
 };
 
 export default function Blogs() {
+  const settings = useSeoSettings();
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -23,11 +25,12 @@ export default function Blogs() {
   }, []);
 
   return (
-    <div className="bg-slate-900 min-h-screen text-slate-100 font-sans overflow-x-hidden selection:bg-cyan-500/30">
+    <div className="bg-white min-h-screen text-navy-900 font-sans overflow-x-hidden">
+      <Seo page="blogs" fallbackTitle="Blog | Skiez Technologies" jsonLd={breadcrumbSchema(settings, [{ name: "Home", path: "/" }, { name: "Blog", path: "/blogs" }])} />
       <section className="relative py-20 px-6 overflow-hidden flex flex-col items-center justify-center text-center">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-          <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-cyan-500/10 rounded-full blur-[120px]" />
-          <div className="absolute top-[40%] -right-[10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+           <div className="absolute inset-0 bg-grid" />
+           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[60rem] h-[30rem] rounded-full glow-brand" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto">
@@ -35,16 +38,16 @@ export default function Blogs() {
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
-            className="inline-block mb-4 px-4 py-1.5 rounded-full border border-slate-700 bg-slate-800/50 backdrop-blur-sm"
+            className="inline-block mb-4"
           >
-            <span className="text-sm font-medium text-cyan-400">Insights &amp; Updates</span>
+            <span className="eyebrow">Insights &amp; Updates</span>
           </motion.div>
 
           <motion.h1
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
-            className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-white via-slate-200 to-slate-500 bg-clip-text text-transparent"
+            className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-gradient-muted font-display !leading-[1.05] !tracking-[-0.035em]"
           >
             Our Blog
           </motion.h1>
@@ -53,7 +56,7 @@ export default function Blogs() {
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
-            className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed"
           >
             Thoughts, updates and ideas from the Skiez Technologies team.
           </motion.p>
@@ -63,16 +66,16 @@ export default function Blogs() {
       <section className="px-6 max-w-7xl mx-auto pb-24 relative z-10">
         {loading && (
           <div className="flex items-center justify-center py-24">
-            <Loader2 className="w-10 h-10 animate-spin text-cyan-500" />
+            <Loader2 className="w-10 h-10 animate-spin text-navy-700" />
           </div>
         )}
 
         {!loading && error && (
-          <p className="text-center text-slate-400 py-16">{error}</p>
+          <p className="text-center text-slate-600 py-16">{error}</p>
         )}
 
         {!loading && !error && blogs.length === 0 && (
-          <p className="text-center text-slate-400 py-16">No blog posts yet. Check back soon.</p>
+          <p className="text-center text-slate-600 py-16">No blog posts yet. Check back soon.</p>
         )}
 
         {!loading && !error && blogs.length > 0 && (
@@ -87,11 +90,13 @@ export default function Blogs() {
               >
                 <Link
                   to={`/blogs/${blog.slug}`}
-                  className="group flex flex-col h-full bg-slate-800/40 border border-slate-700 rounded-3xl overflow-hidden hover:border-cyan-500/40 transition-colors duration-300"
+                  className="group flex flex-col h-full surface surface-hover rounded-3xl overflow-hidden hover:border-navy-300 transition-colors duration-300"
                 >
-                  <div className="aspect-[16/9] bg-slate-800 overflow-hidden">
+                  <div className="aspect-[16/9] bg-slate-100 overflow-hidden">
                     {blog.coverImage ? (
                       <img
+                        loading="lazy"
+                        decoding="async"
                         src={blog.coverImage}
                         alt={blog.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -113,15 +118,15 @@ export default function Blogs() {
                       })}
                     </div>
 
-                    <h2 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                    <h2 className="text-xl font-bold text-navy-900 mb-2 group-hover:text-navy-900 transition-colors">
                       {blog.title}
                     </h2>
 
-                    <p className="text-slate-400 text-sm leading-relaxed line-clamp-3 mb-6">
+                    <p className="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-6">
                       {blog.excerpt}
                     </p>
 
-                    <div className="mt-auto flex items-center gap-2 text-cyan-400 text-sm font-semibold">
+                    <div className="mt-auto flex items-center gap-2 text-navy-700 text-sm font-semibold">
                       Read more
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>

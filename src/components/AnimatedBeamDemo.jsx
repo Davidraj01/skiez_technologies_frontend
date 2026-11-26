@@ -18,7 +18,7 @@ const Circle = forwardRef(({ className, children }, ref) => {
     <div
       ref={ref}
       className={cn(
-        "z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 border-slate-700 bg-slate-800 p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] transition-transform hover:scale-110 duration-300",
+        "z-10 flex h-16 w-16 items-center justify-center rounded-full border border-slate-200 bg-white p-3 shadow-[0_10px_30px_-12px_rgba(11,31,58,0.25)] transition-transform hover:scale-110 duration-300",
         className
       )}
     >
@@ -59,32 +59,32 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
       <div className="flex h-full w-full max-w-lg flex-row items-stretch justify-between gap-10">
         <div className="flex flex-col justify-center gap-6"> {/* Increased gap */}
           <Circle ref={div1Ref}>
-            <Code className="h-6 w-6 text-cyan-400" />
+            <Code className="h-6 w-6 text-navy-700" />
           </Circle>
           <Circle ref={div2Ref}>
-            <Smartphone className="h-6 w-6 text-purple-400" />
+            <Smartphone className="h-6 w-6 text-navy-700" />
           </Circle>
           <Circle ref={div3Ref}>
-            <Layout className="h-6 w-6 text-pink-400" />
+            <Layout className="h-6 w-6 text-navy-700" />
           </Circle>
           <Circle ref={div4Ref}>
-            <Cloud className="h-6 w-6 text-blue-400" />
+            <Cloud className="h-6 w-6 text-navy-700" />
           </Circle>
           <Circle ref={div5Ref}>
-            <Database className="h-6 w-6 text-orange-400" />
+            <Database className="h-6 w-6 text-navy-700" />
           </Circle>
         </div>
         
         <div className="flex flex-col justify-center">
-          <Circle ref={centerRef} className="h-28 w-28 border-cyan-500 bg-slate-900/80 p-5 shadow-2xl shadow-cyan-500/20 backdrop-blur-xl z-20">
+          <Circle ref={centerRef} className="h-28 w-28 border-navy-300 bg-white p-4 shadow-[0_0_60px_-10px_rgba(11,31,58,0.22)] ring-8 ring-navy-50 z-20">
              {/* Center Node representing Skiez */}
-             <img src="/skiez-tech logo.png" alt="Skiez Technologies" className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+             <img src="/skiez-tech-logo.webp" width="80" height="80" decoding="async" alt="Skiez Technologies" className="w-full h-full object-contain " />
           </Circle>
         </div>
         
         <div className="flex flex-col justify-center">
-          <Circle ref={userRef} className="h-20 w-20 border-white/20 bg-slate-800">
-            <User className="h-8 w-8 text-white" />
+          <Circle ref={userRef} className="h-20 w-20 border-slate-200 bg-slate-100">
+            <User className="h-8 w-8 text-navy-900" />
           </Circle>
         </div>
       </div>
@@ -100,8 +100,8 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
                 curvature={beam.curve}
                 duration={beam.duration}
                 delay={beam.delay}
-                gradientStartColor="#22d3ee" // Cyan
-                gradientStopColor="#8b5cf6" // Violet
+                gradientStartColor="#3a5a92"
+                gradientStopColor="#0b1f3a"
                 pathWidth={2}
                 pathOpacity={0.1}
             />
@@ -114,8 +114,8 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
                 duration={beam.duration * 1.5}
                 delay={beam.delay + 1}
                 reverse
-                gradientStartColor="#8b5cf6"
-                gradientStopColor="#22d3ee"
+                gradientStartColor="#0b1f3a"
+                gradientStopColor="#3a5a92"
                 pathWidth={2}
                 pathOpacity={0.05}
             />
@@ -130,8 +130,8 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
         duration={6}
         curvature={0}
         pathWidth={3}
-        gradientStartColor="#ffffff"
-        gradientStopColor="#22d3ee"
+        gradientStartColor="#8aa2cc"
+        gradientStopColor="#3a5a92"
       />
       {/* Reverse signal from User to Center */}
        <AnimatedBeam
@@ -142,8 +142,8 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
         reverse
         pathWidth={2}
         pathOpacity={0.1}
-        gradientStartColor="#22d3ee"
-        gradientStopColor="#ffffff"
+        gradientStartColor="#3a5a92"
+        gradientStopColor="#8aa2cc"
       />
     </div>
   );

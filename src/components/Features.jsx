@@ -6,7 +6,7 @@ import { cx } from "@/utils/cx";
 
 /* Small icon circle (keeps same visual as before) */
 const IconWrapper = ({ children }) => (
-  <div className="inline-flex items-center justify-center rounded-full bg-white p-2 shadow-sm">
+  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-navy-100 bg-navy-50 text-navy-900">
     {children}
   </div>
 );
@@ -14,10 +14,10 @@ const IconWrapper = ({ children }) => (
 /* Simple check item */
 const CheckItem = ({ text }) => (
   <li className="flex items-start gap-3">
-    <span className="mt-1 flex h-5 w-5 items-center justify-center rounded-md bg-white/10">
-      <FiCheck className="h-4 w-4" />
+    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-navy-900">
+      <FiCheck className="h-3 w-3 text-white" />
     </span>
-    <span className="text-md">{text}</span>
+    <span className="text-[15px] leading-relaxed text-slate-600">{text}</span>
   </li>
 );
 
@@ -27,12 +27,12 @@ const AlternateImageMockup = (props) => {
     <div
       className={cx(
         // remove padding → remove gap between outer frame & image
-        "w-full h-full rounded-[20px] bg-transparent lg:static",
+        "w-full h-full rounded-[24px] border border-slate-200 bg-slate-50 p-2 shadow-[0_40px_80px_-30px_rgba(11,31,58,0.25)] lg:static",
         props.className
       )}
     >
-      <div className="w-full h-full rounded-[20px] overflow-hidden">
-        <div className="relative w-full h-full rounded-[20px] overflow-hidden">
+      <div className="w-full h-full rounded-[18px] overflow-hidden">
+        <div className="relative w-full h-full aspect-[4/3] lg:aspect-auto rounded-[18px] overflow-hidden">
           {props.children}
         </div>
       </div>
@@ -95,16 +95,18 @@ export const FeaturesAlternatingLayout01 = () => {
   ];
 
   return (
-    <section className="flex flex-col gap-12 overflow-hidden bg-primary py-16 sm:gap-16 md:gap-20 md:py-24 lg:gap-24">
-      <div className="mx-auto w-full max-w-container px-4 md:px-8">
+    <section className="relative flex flex-col gap-16 overflow-hidden bg-white py-24 md:gap-24 md:py-32">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-px w-full max-w-5xl -translate-x-1/2 hairline" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[30rem] w-[50rem] -translate-x-1/2 -translate-y-1/2 rounded-full glow-brand opacity-60" />
+      <div className="relative mx-auto w-full max-w-7xl px-4 md:px-8">
         <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
-          <span className="text-sm font-semibold text-brand-secondary md:text-md">
+          <span className="eyebrow">
             Features
           </span>
-          <h2 className="mt-3 text-display-sm font-semibold text-primary md:text-display-md">
+          <h2 className="mt-6 font-display text-4xl font-bold tracking-tight text-navy-900 md:text-6xl">
             Beautiful analytics to grow smarter
           </h2>
-          <p className="mt-4 text-lg text-tertiary md:mt-5 md:text-xl">
+          <p className="mt-5 text-lg leading-relaxed text-slate-600 md:mt-6 md:text-xl">
             Powerful, self-serve product and growth analytics to help you
             convert, engage, and retain more users. Trusted by over 4,000
             startups.
@@ -112,7 +114,7 @@ export const FeaturesAlternatingLayout01 = () => {
         </div>
       </div>
 
-      <div className="mx-auto flex w-full max-w-container flex-col gap-12 px-4 sm:gap-16 md:gap-20 md:px-8 lg:gap-24">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-20 px-4 md:gap-28 md:px-8">
         {blocks.map((b, idx) => {
           // Alternate animation directions: text comes from left/right and image opposite
           const textAos = b.imgLeft ? "fade-left" : "fade-right";
@@ -134,15 +136,19 @@ export const FeaturesAlternatingLayout01 = () => {
               >
                 <IconWrapper>{b.icon}</IconWrapper>
 
-                <h2 className="mt-5 text-display-xs font-serif text-primary text-5xl md:text-display-sm text-white">
+                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                  0{idx + 1}
+                </p>
+                <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-navy-900 md:text-5xl">
                   {b.title}
                 </h2>
 
-                <p className="mt-2 text-md text-tertiary md:mt-4 md:text-lg">
+                <p className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg">
                   {b.text}
                 </p>
 
-                <ul className="mt-8 flex flex-col gap-4 pl-2 md:gap-5 md:pl-4">
+                <div className="mt-8 hairline" />
+                <ul className="mt-8 flex flex-col gap-4 md:gap-5">
                   {b.items.map((feat) => (
                     <CheckItem key={feat} text={feat} />
                   ))}
@@ -151,7 +157,7 @@ export const FeaturesAlternatingLayout01 = () => {
 
               {/* Image Column */}
               <div
-                className="relative w-full flex-1 lg:h-128"
+                className="relative w-full flex-1 lg:h-[30rem]"
                 data-aos={imgAos}
               >
                 <AlternateImageMockup
@@ -163,6 +169,7 @@ export const FeaturesAlternatingLayout01 = () => {
                     src={b.img}
                     className="w-full h-full object-cover block dark:hidden"
                     loading="lazy"
+                    decoding="async"
                   />
                   {/* Dark mode image */}
                   <img
@@ -170,6 +177,7 @@ export const FeaturesAlternatingLayout01 = () => {
                     src="https://www.untitledui.com/marketing/screen-mockups/dashboard-desktop-mockup-dark-01.webp"
                     className="hidden dark:block w-full h-full object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
                 </AlternateImageMockup>
               </div>

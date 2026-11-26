@@ -1,12 +1,13 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { LogOut, Newspaper, Images, MessageSquare } from "lucide-react";
+import { LogOut, Newspaper, Images, MessageSquare, Search } from "lucide-react";
 import { useAdminAuth } from "../../context/AdminAuthContext";
 
 const links = [
   { to: "/admin", label: "Blogs", icon: Newspaper },
   { to: "/admin/gallery", label: "Gallery", icon: Images },
   { to: "/admin/messages", label: "Messages", icon: MessageSquare },
+  { to: "/admin/seo", label: "SEO", icon: Search },
 ];
 
 export default function AdminNav() {
