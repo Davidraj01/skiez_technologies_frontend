@@ -2,7 +2,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
-  "rewrites": [{ "source": "/(.*)", "destination": "/app-shell.html" }],
+  "rewrites": [{ "source": "/(.*)", "destination": "/app-shell" }],
   "headers": [
     {
       "source": "/assets/(.*)",
