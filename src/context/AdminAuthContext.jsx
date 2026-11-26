@@ -4,9 +4,11 @@ import api from "../lib/api";
 const AdminAuthContext = createContext(null);
 
 export const AdminAuthProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem("skiez_admin_token"));
+  // localStorage only exists in the browser (pages are also pre-rendered at build time)
+  const hasStorage = typeof window !== "undefined" && typeof localStorage !== "undefined";
+  const [token, setToken] = useState(() => (hasStorage ? localStorage.getItem("skiez_admin_token") : null));
   const [admin, setAdmin] = useState(() => {
-    const stored = localStorage.getItem("skiez_admin_info");
+    const stored = hasStorage ? localStorage.getItem("skiez_admin_info") : null;
     return stored ? JSON.parse(stored) : null;
   });
 

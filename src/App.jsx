@@ -122,14 +122,20 @@ const SiteLayout = () => {
   );
 };
 
+/** Everything inside the router. Shared by the browser (BrowserRouter) and the
+ *  build-time pre-renderer (StaticRouter, see entry-server.jsx). */
+export const AppProviders = ({ seoSettings, seoCollector }) => (
+  <AdminAuthProvider>
+    <SeoProvider initialSettings={seoSettings} collector={seoCollector}>
+      <SiteLayout />
+    </SeoProvider>
+  </AdminAuthProvider>
+);
+
 const App = () => {
   return (
     <BrowserRouter>
-      <AdminAuthProvider>
-        <SeoProvider>
-          <SiteLayout />
-        </SeoProvider>
-      </AdminAuthProvider>
+      <AppProviders />
     </BrowserRouter>
   );
 };

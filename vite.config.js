@@ -4,6 +4,10 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Shown as "Last updated" on the home page and used as dateModified in structured data
+  define: {
+    __BUILD_DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
+  },
   plugins: [
     react({
       babel: {
