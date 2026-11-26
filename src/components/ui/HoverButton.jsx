@@ -13,13 +13,14 @@ const HoverButton = ({ href = "/contact", text = "Start free trial" }) => {
       onMouseLeave={() => setIsHovered(false)}
       className={`
         relative inline-flex items-center pl-8 pr-[72px] rounded-full 
-        bg-[#ffe580] text-black font-semibold overflow-hidden
-        border border-transparent whitespace-nowrap text-lg
+        bg-white text-navy-900 font-semibold overflow-hidden
+        border border-navy-200 whitespace-nowrap text-base tracking-tight
+        shadow-[0_14px_32px_-14px_rgba(11,31,58,0.45)]
       `}
       style={{ height: '56px' }} 
     >
       {/* Text Layer */}
-      <span className={`relative z-10 transition-colors duration-300 ${isHovered ? 'text-white' : 'text-black'}`}>
+      <span className={`relative z-10 transition-colors duration-300 ${isHovered ? 'text-white' : 'text-navy-900'}`}>
         {text}
       </span>
       
@@ -33,7 +34,7 @@ const HoverButton = ({ href = "/contact", text = "Start free trial" }) => {
             right: '4px' // Keep it pinned to right with consistent padding
         }}
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        className="absolute top-1/2 -translate-y-1/2 bg-black rounded-full z-0 flex items-center justify-end"
+        className="absolute top-1/2 -translate-y-1/2 bg-navy-900 rounded-full z-0 flex items-center justify-end"
       >
         {/* Icon Container */}
         <div className="w-12 h-12 flex items-center justify-center shrink-0">
@@ -41,7 +42,7 @@ const HoverButton = ({ href = "/contact", text = "Start free trial" }) => {
                 animate={{ rotate: isHovered ? -45 : 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
              >
-                <ArrowRight className="w-6 h-6 text-white" strokeWidth={2.5} />
+                <ArrowRight className="w-5 h-5 text-white" strokeWidth={2.5} />
              </motion.div>
         </div>
       </motion.div>

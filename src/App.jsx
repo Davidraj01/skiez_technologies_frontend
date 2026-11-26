@@ -4,9 +4,8 @@ import Navbar from "./components/Navbar";
 import Footer from './components/Footer';
 import { Toaster } from "react-hot-toast";
 import { Loader2 } from "lucide-react";
-import PrivacyTechnologies from "./pages/Privacy";
-import TermsTechnologies from "./pages/Terms";
 import { AdminAuthProvider } from "./context/AdminAuthContext";
+import { SeoProvider } from "./lib/seo";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 
 // Lazy load pages
@@ -18,15 +17,18 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Blogs = lazy(() => import("./pages/Blogs"));
 const BlogDetail = lazy(() => import("./pages/BlogDetail"));
 const Gallery = lazy(() => import("./pages/Gallery"));
+const PrivacyTechnologies = lazy(() => import("./pages/Privacy"));
+const TermsTechnologies = lazy(() => import("./pages/Terms"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminBlogForm = lazy(() => import("./pages/admin/AdminBlogForm"));
 const AdminGallery = lazy(() => import("./pages/admin/AdminGallery"));
 const AdminMessages = lazy(() => import("./pages/admin/AdminMessages"));
+const AdminSeo = lazy(() => import("./pages/admin/AdminSeo"));
 
 const LoadingFallback = () => (
   <div className="flex items-center justify-center min-h-[60vh]">
-    <Loader2 className="w-10 h-10 animate-spin text-cyan-500" />
+    <Loader2 className="w-10 h-10 animate-spin text-navy-700" />
   </div>
 );
 
@@ -35,10 +37,21 @@ const SiteLayout = () => {
   const isAdmin = location.pathname.startsWith("/admin");
 
   return (
-    <div className="relative bg-gray-900 text-white min-h-screen overflow-hidden">
+    <div className="relative bg-white text-navy-900 min-h-screen overflow-hidden">
       {!isAdmin && <Navbar />}
       <main className={isAdmin ? "min-h-screen" : "pt-20 md:pt-24 min-h-screen"}>
-        <Toaster position="top-right" />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: "#0e1424",
+              color: "#e2e8f0",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: "14px",
+              fontSize: "14px",
+            },
+          }}
+        />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -86,6 +99,14 @@ const SiteLayout = () => {
               }
             />
             <Route
+              path="/admin/seo"
+              element={
+                <ProtectedRoute>
+                  <AdminSeo />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/admin/messages"
               element={
                 <ProtectedRoute>
@@ -105,7 +126,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <AdminAuthProvider>
-        <SiteLayout />
+        <SeoProvider>
+          <SiteLayout />
+        </SeoProvider>
       </AdminAuthProvider>
     </BrowserRouter>
   );

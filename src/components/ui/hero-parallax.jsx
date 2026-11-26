@@ -1,107 +1,212 @@
 "use client";
-import React from "react";
-import { motion, useScroll, useTransform, useSpring } from "motion/react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "motion/react";
+import { X, ArrowRight, Maximize2 } from "lucide-react";
 
+/**
+ * Home hero + "Our Works" portfolio.
+ * Every project is shown exactly once, in a responsive grid, fully visible on every screen.
+ * Cards open an on-site preview (never the client's website).
+ */
+export const HeroParallax = ({ products }) => {
+  const [active, setActive] = useState(null);
 
-
-export const HeroParallax = ({
-  products
-}) => {
-  const firstRow = products.slice(0, 5);
-  const secondRow = products.slice(5, 10);
-  const thirdRow = products.slice(10, 15);
-  const ref = React.useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
-
-  const translateX = useSpring(useTransform(scrollYProgress, [0, 1], [0, 1000]), springConfig);
-  const translateXReverse = useSpring(useTransform(scrollYProgress, [0, 1], [0, -1000]), springConfig);
-  const rotateX = useSpring(useTransform(scrollYProgress, [0, 0.2], [15, 0]), springConfig);
-  const opacity = useSpring(useTransform(scrollYProgress, [0, 0.2], [0.2, 1]), springConfig);
-  const rotateZ = useSpring(useTransform(scrollYProgress, [0, 0.2], [20, 0]), springConfig);
-  const translateY = useSpring(useTransform(scrollYProgress, [0, 0.2], [-700, 500]), springConfig);
   return (
-    <div
-      ref={ref}
-      className="h-[300vh] py-24 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]">
+    <>
       <Header />
-      <motion.div
-        style={{
-          rotateX,
-          rotateZ,
-          translateY,
-          opacity,
-        }}
-        className="">
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-10">
-          {firstRow.map((product) => (
-            <ProductCard product={product} translate={translateX} key={product.title} />
-          ))}
+
+      <section aria-labelledby="our-works" className="relative mx-auto max-w-7xl px-4 pb-24 md:px-8 md:pb-32">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 flex flex-col items-center text-center md:mb-14"
+        >
+          <span className="eyebrow">Portfolio</span>
+          <h2 id="our-works" className="mt-5 font-display text-4xl font-bold tracking-tight text-navy-900 md:text-5xl">
+            Our Works
+          </h2>
         </motion.div>
-        <motion.div className="flex flex-row  mb-20 space-x-20 ">
-          {secondRow.map((product) => (
-            <ProductCard product={product} translate={translateXReverse} key={product.title} />
+
+        {/* Centered wrap: an odd last card sits in the middle instead of hanging left */}
+        <ul className="flex flex-wrap justify-center gap-6 lg:gap-8">
+          {products.map((product, i) => (
+            <motion.li
+              key={product.title}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+              className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]"
+            >
+              <ProductCard product={product} onOpen={() => setActive(product)} />
+            </motion.li>
           ))}
-        </motion.div>
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
-          {thirdRow.map((product) => (
-            <ProductCard product={product} translate={translateX} key={product.title} />
-          ))}
-        </motion.div>
-      </motion.div>
-    </div>
+        </ul>
+      </section>
+
+      <WorkPreview product={active} onClose={() => setActive(null)} />
+    </>
   );
 };
 
 export const Header = () => {
   return (
-    <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0">
-      <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
-        Elevate with Code <br /> Dominate with Reach
-      </h1>
-      <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200 text-justify">
+    <div className="isolate max-w-7xl relative mx-auto pt-16 pb-20 md:pt-28 md:pb-28 px-4 md:px-8 w-full">
+      {/* Ambient backdrop */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-grid" />
+        <div className="absolute -top-40 left-1/4 h-[36rem] w-[36rem] rounded-full glow-brand blur-2xl" />
+      </div>
+
+      <motion.h1
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.025em] text-navy-900 sm:text-5xl md:text-7xl lg:text-[5.25rem]"
+      >
+        Elevate with Code <br />
+        <span className="text-gradient">Dominate with Reach</span>
+      </motion.h1>
+      <div className="mt-8 h-1 w-20 rounded-full bg-navy-900 md:mt-10" />
+      <motion.p
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.15 }}
+        className="max-w-2xl text-base md:text-lg mt-6 md:mt-8 leading-relaxed text-slate-600"
+      >
         At Skiez Technologies India Pvt Ltd, we build scalable tech-driven
         solutions across Full-Stack Development, Mobile App Frameworks and
         Database Management. We serve industries like E-Commerce, Healthcare,
         Education, Real Estate and B2B, delivering customized digital products
         that meet each business’s unique needs.
-      </p>
+      </motion.p>
     </div>
   );
 };
 
-export const ProductCard = ({
-  product,
-  translate
-}) => {
+export const ProductCard = ({ product, onOpen }) => {
   return (
-    <motion.div
-      style={{
-        x: translate,
-      }}
-      whileHover={{
-        y: -20,
-      }}
-      key={product.title}
-      className="group/product h-96 w-[30rem] relative shrink-0">
-      <a href={product.link} className="block group-hover/product:shadow-2xl ">
-        <img
-          src={product.thumbnail}
-          height="600"
-          width="600"
-          className="object-cover object-left-top absolute h-full w-full inset-0"
-          alt={product.title} />
-      </a>
-      <div
-        className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
-      <h2
-        className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
-        {product.title}
-      </h2>
-    </motion.div>
+    <div className="group/product relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_24px_50px_-30px_rgba(11,31,58,0.35)] transition-all duration-500 hover:-translate-y-1.5 hover:border-navy-300 hover:shadow-[0_32px_60px_-28px_rgba(11,31,58,0.45)]">
+      {/* Opens an on-site preview — never navigates to the client's website */}
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label={`Preview ${product.title}`}
+        className="flex h-full w-full flex-col text-left"
+      >
+        {/* Browser-window chrome */}
+        <div className="flex h-8 w-full shrink-0 items-center gap-1.5 border-b border-slate-200 bg-slate-50 px-3.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
+          <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
+          <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
+        </div>
+
+        {/* Screenshot: always shown in full (object-contain); a blurred copy fills any spare space */}
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
+          <img
+            src={product.thumbnail}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full scale-110 object-cover opacity-50 blur-2xl"
+          />
+          <img
+            src={product.thumbnail}
+            width="480"
+            height="300"
+            loading="lazy"
+            decoding="async"
+            className="relative h-full w-full object-contain transition-transform duration-700 group-hover/product:scale-[1.03]"
+            alt={product.title}
+          />
+          <span className="absolute inset-0 flex items-center justify-center bg-navy-900/0 opacity-0 transition-all duration-500 group-hover/product:bg-navy-900/40 group-hover/product:opacity-100">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-navy-900 shadow-lg">
+              <Maximize2 className="h-5 w-5" />
+            </span>
+          </span>
+        </div>
+
+        {/* Caption: always visible */}
+        <div className="flex h-14 w-full shrink-0 items-center justify-between gap-3 border-t border-slate-200 bg-white px-5">
+          <span className="truncate font-display text-[15px] font-semibold tracking-tight text-navy-900">
+            {product.title}
+          </span>
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-slate-200 text-navy-700 transition-all duration-300 group-hover/product:border-navy-900 group-hover/product:bg-navy-900 group-hover/product:text-white">
+            <ArrowRight className="h-3.5 w-3.5" />
+          </span>
+        </div>
+      </button>
+    </div>
+  );
+};
+
+/* Full-size on-site preview of a project. Keeps visitors on the Skiez website. */
+const WorkPreview = ({ product, onClose }) => {
+  useEffect(() => {
+    if (!product) return;
+    const onKey = (e) => e.key === "Escape" && onClose();
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [product, onClose]);
+
+  return (
+    <AnimatePresence>
+      {product && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="fixed inset-0 z-[2000] flex items-center justify-center bg-navy-950/70 p-4 backdrop-blur-sm md:p-8"
+          role="dialog"
+          aria-modal="true"
+          aria-label={product.title}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 24, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 24, scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 320, damping: 30 }}
+            onClick={(e) => e.stopPropagation()}
+            className="flex max-h-full w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+          >
+            <div className="flex items-center justify-between gap-4 border-b border-slate-200 px-5 py-4 md:px-6">
+              <div className="min-w-0">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-navy-500">Our Works</p>
+                <h3 className="truncate font-display text-lg font-bold text-navy-900 md:text-xl">{product.title}</h3>
+              </div>
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close preview"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 text-navy-900 transition-colors hover:bg-slate-100"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="min-h-0 flex-1 overflow-auto bg-slate-100">
+              <img src={product.thumbnail} alt={product.title} className="mx-auto block h-auto w-full" />
+            </div>
+
+            <div className="flex flex-col items-start justify-between gap-3 border-t border-slate-200 px-5 py-4 sm:flex-row sm:items-center md:px-6">
+              <p className="text-sm text-slate-600">Want something like this for your business?</p>
+              <Link to="/contact" onClick={onClose} className="btn-primary !py-2.5">
+                Start a Project <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

@@ -42,8 +42,8 @@ const SpotlightCard = ({ children, className = "" }) => {
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`group relative rounded-3xl border border-slate-800 bg-slate-900/50 overflow-hidden ${className}`}
-      whileHover={{ scale: 1.02 }}
+      className={`group relative rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-[0_20px_50px_-30px_rgba(11,31,58,0.35)] ${className}`}
+      whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
       {/* Aurora Border Effect - Visible on Hover */}
@@ -53,7 +53,7 @@ const SpotlightCard = ({ children, className = "" }) => {
           <div 
              className="absolute inset-[-100%] animate-spin-slow"
              style={{
-               background: "conic-gradient(from 90deg at 50% 50%, #00000000 50%, #06b6d4 50%, #8b5cf6 70%, #00000000 100%)"
+               background: "conic-gradient(from 90deg at 50% 50%, #00000000 50%, #3a5a92 50%, #0b1f3a 70%, #00000000 100%)"
              }}
           />
       </div>
@@ -62,13 +62,13 @@ const SpotlightCard = ({ children, className = "" }) => {
           Since we used transparency in the conic gradient, we might not need a solid mask if the gradient is only at the edges? 
           No, conic gradient spins from the center. We need a mask. 
       */}
-      <div className="absolute inset-[1px] bg-slate-950 rounded-[calc(1.5rem-1px)] z-0 pointer-events-none" />
+      <div className="absolute inset-[1px] bg-white rounded-[calc(1.5rem-1px)] z-0 pointer-events-none" />
 
       <div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 z-10"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(6,182,212,0.15), transparent 40%)`,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(11,31,58,0.06), transparent 40%)`,
         }}
       />
       <div className="relative h-full z-20">{children}</div>
