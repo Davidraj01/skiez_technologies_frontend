@@ -10,18 +10,32 @@ import { useLocation } from "react-router-dom";
 import api from "./api";
 
 const SeoContext = createContext(null);
+// Set only during build-time pre-rendering: collects the head tags each page wants
+const SeoCollectorContext = createContext(null);
 
-export function SeoProvider({ children }) {
-  const [settings, setSettings] = useState(null);
+/**
+ * @param initialSettings  settings snapshot used while pre-rendering (and embedded in the
+ *                         page as window.__SEO_SETTINGS__ so the browser starts with the same data)
+ * @param collector        { head: null } object filled by <Seo> during pre-rendering
+ */
+export function SeoProvider({ children, initialSettings = null, collector = null }) {
+  const [settings, setSettings] = useState(
+    () => initialSettings ?? (typeof window !== "undefined" ? window.__SEO_SETTINGS__ ?? null : null)
+  );
 
   useEffect(() => {
+    // Refresh with the latest admin settings (site keeps working on built-in fallbacks if offline)
     api
       .get("/seo/settings")
       .then((res) => setSettings(res.data))
-      .catch(() => setSettings(null)); // site still works with built-in fallbacks
+      .catch(() => {});
   }, []);
 
-  return <SeoContext.Provider value={settings}>{children}</SeoContext.Provider>;
+  return (
+    <SeoCollectorContext.Provider value={collector}>
+      <SeoContext.Provider value={settings}>{children}</SeoContext.Provider>
+    </SeoCollectorContext.Provider>
+  );
 }
 
 export const useSeoSettings = () => useContext(SeoContext);
@@ -131,6 +145,58 @@ const upsertTag = (tag, keyAttr, keyValue, attrs) => {
   Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
 };
 
+const escapeAttr = (v = "") =>
+  String(v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/** Compute every head tag for a page. Used by the browser and by build-time pre-rendering. */
+export function computeSeo(props, settings, pathname) {
+  const { page, title, description, keywords, image, type = "website", noindex = false, fallbackTitle, jsonLd, publishedTime, modifiedTime } = props;
+  const pageSeo = (page && settings?.pages?.[page]) || {};
+  const siteName = settings?.siteName || "Skiez Technologies";
+  const finalTitle = title || pageSeo.title || fallbackTitle || siteName;
+  const finalDescription = description || pageSeo.description || settings?.business?.description || "";
+  const finalImage = absoluteUrl(settings, image || settings?.defaultOgImage || "/skiez-tech-logo.webp");
+  const base = siteBase(settings);
+  const canonical = base ? base + (pathname === "/" ? "/" : pathname.replace(/\/+$/, "")) : "";
+
+  return {
+    title: finalTitle,
+    names: {
+      description: finalDescription,
+      keywords: keywords || pageSeo.keywords || "",
+      robots: noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large",
+      "twitter:card": "summary_large_image",
+      "twitter:title": finalTitle,
+      "twitter:description": finalDescription,
+      "twitter:image": finalImage,
+    },
+    properties: {
+      "og:type": type,
+      "og:site_name": siteName,
+      "og:title": finalTitle,
+      "og:description": finalDescription,
+      "og:url": canonical,
+      "og:image": finalImage,
+      "og:locale": "en_IN",
+      "article:published_time": publishedTime,
+      "article:modified_time": modifiedTime,
+    },
+    canonical,
+    jsonLd: (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean),
+  };
+}
+
+/** Serialize computed tags to HTML for the pre-rendered <head>. */
+export function headTagsToHtml(seo) {
+  if (!seo) return "";
+  const out = [`<title>${escapeAttr(seo.title)}</title>`];
+  for (const [k, v] of Object.entries(seo.names)) if (v) out.push(`<meta name="${k}" content="${escapeAttr(v)}" />`);
+  for (const [k, v] of Object.entries(seo.properties)) if (v) out.push(`<meta property="${k}" content="${escapeAttr(v)}" />`);
+  if (seo.canonical) out.push(`<link rel="canonical" href="${escapeAttr(seo.canonical)}" />`);
+  for (const schema of seo.jsonLd) out.push(`<script type="application/ld+json" data-seo="jsonld">${safeJson(schema)}</script>`);
+  return out.join("\n    ");
+}
+
 /**
  * Per-page SEO tags.
  * @param page        key of a page in Admin → SEO (home, services, about, contact, blogs, gallery)
@@ -138,67 +204,33 @@ const upsertTag = (tag, keyAttr, keyValue, attrs) => {
  * @param fallbackTitle  used when settings haven't loaded / are empty
  * @param jsonLd      object or array of structured-data objects
  */
-export function Seo({
-  page,
-  title,
-  description,
-  keywords,
-  image,
-  type = "website",
-  noindex = false,
-  fallbackTitle,
-  jsonLd,
-  publishedTime,
-  modifiedTime,
-}) {
+export function Seo(props) {
   const settings = useSeoSettings();
+  const collector = useContext(SeoCollectorContext);
   const { pathname } = useLocation();
-  const pageSeo = (page && settings?.pages?.[page]) || {};
-  const siteName = settings?.siteName || "Skiez Technologies";
+  const seo = computeSeo(props, settings, pathname);
 
-  const finalTitle = title || pageSeo.title || fallbackTitle || siteName;
-  const finalDescription = description || pageSeo.description || settings?.business?.description || "";
-  const finalKeywords = keywords || pageSeo.keywords || "";
-  const finalImage = absoluteUrl(settings, image || settings?.defaultOgImage || "/skiez-tech-logo.webp");
-  const base = siteBase(settings);
-  const canonical = base ? base + (pathname === "/" ? "/" : pathname.replace(/\/+$/, "")) : "";
-  const schemaJson = JSON.stringify((Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean));
+  // Build-time pre-rendering: hand the tags to the prerender script (no DOM on the server)
+  if (collector) collector.head = seo;
 
+  const key = JSON.stringify(seo);
   useEffect(() => {
-    document.title = finalTitle;
-    const name = (n, content) => upsertTag("meta", "name", n, content ? { content } : null);
-    const prop = (p, content) => upsertTag("meta", "property", p, content ? { content } : null);
-
-    name("description", finalDescription);
-    name("keywords", finalKeywords);
-    name("robots", noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large");
-    upsertTag("link", "rel", "canonical", canonical ? { href: canonical } : null);
-
-    // Social previews (WhatsApp, LinkedIn, Facebook, X)
-    prop("og:type", type);
-    prop("og:site_name", siteName);
-    prop("og:title", finalTitle);
-    prop("og:description", finalDescription);
-    prop("og:url", canonical);
-    prop("og:image", finalImage);
-    prop("og:locale", "en_IN");
-    prop("article:published_time", publishedTime);
-    prop("article:modified_time", modifiedTime);
-    name("twitter:card", "summary_large_image");
-    name("twitter:title", finalTitle);
-    name("twitter:description", finalDescription);
-    name("twitter:image", finalImage);
+    const s = JSON.parse(key);
+    document.title = s.title;
+    for (const [k, v] of Object.entries(s.names)) upsertTag("meta", "name", k, v ? { content: v } : null);
+    for (const [k, v] of Object.entries(s.properties)) upsertTag("meta", "property", k, v ? { content: v } : null);
+    upsertTag("link", "rel", "canonical", s.canonical ? { href: s.canonical } : null);
 
     // Structured data (JSON-LD) for this page — replaced on every route change
     document.head.querySelectorAll('script[data-seo="jsonld"]').forEach((el) => el.remove());
-    JSON.parse(schemaJson).forEach((schema) => {
+    s.jsonLd.forEach((schema) => {
       const el = document.createElement("script");
       el.type = "application/ld+json";
       el.dataset.seo = "jsonld";
       el.textContent = safeJson(schema);
       document.head.appendChild(el);
     });
-  }, [finalTitle, finalDescription, finalKeywords, noindex, canonical, type, siteName, finalImage, publishedTime, modifiedTime, schemaJson]);
+  }, [key]);
 
   return null;
 }
