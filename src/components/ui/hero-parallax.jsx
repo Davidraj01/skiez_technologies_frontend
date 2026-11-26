@@ -57,24 +57,25 @@ export const Header = () => {
   return (
     <div className="isolate max-w-7xl relative mx-auto pt-16 pb-20 md:pt-28 md:pb-28 px-4 md:px-8 w-full">
       {/* Interactive Shape Grid backdrop (React Bits): full-width, lights up in the Skiez logo
-          blue wherever the cursor moves. Listens on window, so it reacts under the text too. */}
+          blue wherever the cursor moves (kept subtle). Listens on window, so it reacts under the text too. */}
       <div className="pointer-events-none absolute -top-28 bottom-0 left-1/2 -z-10 w-screen -translate-x-1/2 md:-top-32">
         <ShapeGrid
           shape="square"
-          cellSize={44}
+          cellSize={48}
           lineWidth={1}
           direction="diagonal"
-          speed={0.35}
-          lineColor="#d7e6f7"
-          hoverColor="#1d7fe0"
+          speed={0.2}
+          lineColor="#e6eff9"
+          hoverColor="#7db9ee"
           hoverFillColor="#29abe2"
-          fillOpacity={0.14}
-          radius={1.6}
-          trail={0.7}
-          glow={0.25}
-          clickCascade
-          intro
-          fade={0.9}
+          fillOpacity={0.06}
+          radius={0.9}
+          trail={0.45}
+          glow={0.08}
+          clickCascade={false}
+          intro={false}
+          fade={1}
+          opacity={0.9}
           backgroundColor="#ffffff"
         />
       </div>
