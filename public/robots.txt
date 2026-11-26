@@ -1,5 +1,59 @@
+# robots.txt for Skiez Technologies
+# AI crawler access is managed in Admin -> SEO -> "Allow AI crawlers".
+# Current policy: AI search and assistant bots are ALLOWED (so the site can appear in AI answers).
+
+# All crawlers (Google, Bing, others)
 User-agent: *
 Allow: /
 Disallow: /admin
+
+# OpenAI: ChatGPT search, browsing and training
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+
+# Anthropic: Claude search, browsing and training
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+
+# Perplexity
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin
+
+# Google Gemini / AI Overviews training control
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+
+# Microsoft Copilot / Bing
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+Disallow: /admin
+
+# Common Crawl (dataset used by many AI models)
+User-agent: CCBot
+Allow: /
+Disallow: /admin
+
+# Aggressive scrapers (no search or AI-answer benefit)
+User-agent: Bytespider
+Disallow: /
 
 Sitemap: https://www.skieztechnologies.org/sitemap.xml
