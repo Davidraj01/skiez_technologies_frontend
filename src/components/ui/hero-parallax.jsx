@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ArrowRight, Maximize2 } from "lucide-react";
+import ShapeGrid from "./ShapeGrid";
 
 /**
  * Home hero + "Our Works" portfolio.
@@ -55,10 +56,27 @@ export const HeroParallax = ({ products }) => {
 export const Header = () => {
   return (
     <div className="isolate max-w-7xl relative mx-auto pt-16 pb-20 md:pt-28 md:pb-28 px-4 md:px-8 w-full">
-      {/* Ambient backdrop */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-grid" />
-        <div className="absolute -top-40 left-1/4 h-[36rem] w-[36rem] rounded-full glow-brand blur-2xl" />
+      {/* Interactive Shape Grid backdrop (React Bits): full-width, lights up in the Skiez logo
+          blue wherever the cursor moves. Listens on window, so it reacts under the text too. */}
+      <div className="pointer-events-none absolute -top-28 bottom-0 left-1/2 -z-10 w-screen -translate-x-1/2 md:-top-32">
+        <ShapeGrid
+          shape="square"
+          cellSize={44}
+          lineWidth={1}
+          direction="diagonal"
+          speed={0.35}
+          lineColor="#d7e6f7"
+          hoverColor="#1d7fe0"
+          hoverFillColor="#29abe2"
+          fillOpacity={0.14}
+          radius={1.6}
+          trail={0.7}
+          glow={0.25}
+          clickCascade
+          intro
+          fade={0.9}
+          backgroundColor="#ffffff"
+        />
       </div>
 
       <motion.h1
