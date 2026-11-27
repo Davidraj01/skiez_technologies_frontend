@@ -12,7 +12,7 @@ export const geoDefinition =
 export const geoTakeaways = [
   "Founded in 2013 by Dr. S. Davidraj and based in Chengalpattu / Chennai, Tamil Nadu, India.",
   "Core services: full-stack web development, mobile app development, UI/UX design, cloud solutions, AI & machine learning, data analytics and digital marketing.",
-  "Main technologies: the MERN stack (MongoDB, Express, React, Node.js), Next.js, Flutter and React Native.",
+  "Main technologies: the MERN stack (MongoDB, Express, React, Node.js), Next.js and Flutter.",
   "Serves startups, SMEs and enterprises in E-Commerce, Healthcare, Education, Real Estate and B2B.",
   "Every project follows four steps: Discovery, Strategy & Design, Development, and Launch & Scale.",
   "50+ projects delivered, with clients in 10+ countries.",
@@ -37,7 +37,7 @@ export const geoFaqs = [
   {
     question: "Which technologies does Skiez Technologies use for mobile apps?",
     answer:
-      "Skiez Technologies builds cross-platform mobile apps with [Flutter](https://flutter.dev/) and [React Native](https://reactnative.dev/), and native apps for iOS and Android.",
+      "Skiez Technologies builds cross-platform mobile apps with [Flutter](https://flutter.dev/), and native apps for iOS and Android.",
   },
   {
     question: "Which industries does Skiez Technologies work with?",
