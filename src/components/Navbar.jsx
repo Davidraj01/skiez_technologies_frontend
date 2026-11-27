@@ -44,16 +44,18 @@ const Header = () => {
         }`}
       >
         {/* Logo */}
-        <Link
-          to="/"
-          aria-label="Home"
-          className="group flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-white shadow-[0_6px_18px_-8px_rgba(11,31,58,0.45)] ring-1 ring-slate-200 transition-transform duration-500 hover:scale-105"
-        >
-          <img
-            src={logo}
-            alt="Company Logo"
-            className="h-full w-full object-contain transition-transform duration-700 group-hover:rotate-[120deg]"
-          />
+        <Link to="/" aria-label="Skiez Technologies home" className="group flex min-w-0 items-center gap-3">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white shadow-[0_6px_18px_-8px_rgba(11,31,58,0.45)] ring-1 ring-slate-200 transition-transform duration-500 group-hover:scale-105">
+            <img
+              src={logo}
+              alt="Company Logo"
+              className="h-full w-full object-contain transition-transform duration-700 group-hover:rotate-[120deg]"
+            />
+          </span>
+          {/* Company name: hidden only on tablets (md) where the full nav needs the room */}
+          <span className="truncate font-display text-base font-bold tracking-tight text-navy-900 sm:text-lg md:hidden lg:inline">
+            Skiez Technologies
+          </span>
         </Link>
 
         {/* Desktop links */}
