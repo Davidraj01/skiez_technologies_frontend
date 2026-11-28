@@ -244,3 +244,21 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* "Our Works" marquee: the track holds the list twice and slides right-to-left by half
+   its width, so the loop is seamless. Hovering (or keyboard-focusing) a row pauses it. */
+@keyframes works-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.works-track {
+  animation: works-marquee var(--works-duration, 60s) linear infinite;
+}
+.works-row:hover .works-track,
+.works-row:focus-within .works-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .works-track { animation: none; }
+  .works-row { overflow-x: auto; }
+}

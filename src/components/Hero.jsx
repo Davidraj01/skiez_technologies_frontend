@@ -17,6 +17,18 @@ import rvrBuilders from "../assets/optimized/rvr-builders.webp";
 import royalMatrimony from "../assets/optimized/royal-matrimony.webp";
 import divineLaundry from "../assets/optimized/divine-laundry.webp";
 
+// Mobile apps (icons + screenshots taken from their Google Play listings, self-hosted)
+import marineIcon from "../assets/optimized/apps/marine-icon.webp";
+import marine1 from "../assets/optimized/apps/marine-1.webp";
+import marine2 from "../assets/optimized/apps/marine-2.webp";
+import marine3 from "../assets/optimized/apps/marine-3.webp";
+import marine4 from "../assets/optimized/apps/marine-4.webp";
+import schoolIcon from "../assets/optimized/apps/school-icon.webp";
+import school1 from "../assets/optimized/apps/school-1.webp";
+import school2 from "../assets/optimized/apps/school-2.webp";
+import school3 from "../assets/optimized/apps/school-3.webp";
+import school4 from "../assets/optimized/apps/school-4.webp";
+
 export function HeroParallaxDemo() {
   return <HeroParallax products={products} />;
 }
@@ -39,4 +51,21 @@ export const products = [
   { title: "TASPEF", thumbnail: taspef },
   { title: "RuspWak", thumbnail: ruspwak },
   { title: "Skiezpdbooks", thumbnail: pdfApp },
+  // Mobile apps — shown with a Google Play badge, but never link out to the store.
+  {
+    title: "Conserve Marine Biodiversity",
+    type: "app",
+    icon: marineIcon,
+    thumbnail: marine1,
+    screenshots: [marine1, marine2, marine3, marine4],
+    description: "Protect oceans & marine life. Learn, volunteer, donate and support conservation.",
+  },
+  {
+    title: "School Management App",
+    type: "app",
+    icon: schoolIcon,
+    thumbnail: school1,
+    screenshots: [school1, school2, school3, school4],
+    description: "Smart School ERP for attendance, homework, fees & parent communication.",
+  },
 ];

@@ -7,7 +7,7 @@ import ShapeGrid from "./ShapeGrid";
 
 /**
  * Home hero + "Our Works" portfolio.
- * Every project is shown exactly once, in a responsive grid, fully visible on every screen.
+ * Projects slide right-to-left in a black & white marquee (pauses on hover), so new works never crowd the page.
  * Cards open an on-site preview (never the client's website).
  */
 export const HeroParallax = ({ products }) => {
@@ -17,39 +17,77 @@ export const HeroParallax = ({ products }) => {
     <>
       <Header />
 
-      <section aria-labelledby="our-works" className="relative mx-auto max-w-7xl px-4 pb-24 md:px-8 md:pb-32">
+      {/* Black & white section. Works slide right-to-left in rows; hovering a row pauses it,
+          so the list can keep growing without crowding the page. */}
+      <section
+        aria-labelledby="our-works"
+        className="relative overflow-hidden bg-black py-20 text-white md:py-28"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="mb-12 flex flex-col items-center text-center md:mb-14"
+          className="mx-auto mb-12 flex max-w-7xl flex-col items-center px-4 text-center md:mb-16 md:px-8"
         >
-          <span className="eyebrow">Portfolio</span>
-          <h2 id="our-works" className="mt-5 font-display text-4xl font-bold tracking-tight text-navy-900 md:text-5xl">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/80">
+            <span className="h-1.5 w-1.5 rounded-full bg-white" /> Portfolio
+          </span>
+          <h2 id="our-works" className="mt-5 font-display text-4xl font-bold tracking-tight text-white md:text-5xl">
             Our Works
           </h2>
+          <p className="mt-4 max-w-xl text-sm text-white/60 md:text-base">
+            Websites and mobile apps we've built. Hover to pause, click any work to preview it.
+          </p>
         </motion.div>
 
-        {/* Centered wrap: an odd last card sits in the middle instead of hanging left */}
-        <ul className="flex flex-wrap justify-center gap-6 lg:gap-8">
-          {products.map((product, i) => (
-            <motion.li
-              key={product.title}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-              className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]"
-            >
-              <ProductCard product={product} onOpen={() => setActive(product)} />
-            </motion.li>
+        <div className="flex flex-col gap-6 md:gap-8">
+          {splitIntoRows(products).map((row, r) => (
+            <MarqueeRow key={r} items={row} onOpen={setActive} slower={r % 2 === 1} />
           ))}
-        </ul>
+        </div>
       </section>
 
       <WorkPreview product={active} onClose={() => setActive(null)} />
     </>
+  );
+};
+
+/* One row while the list is short; two rows (items alternated) once it grows. */
+const splitIntoRows = (items) =>
+  items.length < 8 ? [items] : [items.filter((_, i) => i % 2 === 0), items.filter((_, i) => i % 2 === 1)];
+
+/* A row that slides right-to-left forever. The list is rendered twice for a seamless loop;
+   the copy is hidden from screen readers and keyboard. Speed stays constant as works are added. */
+const MarqueeRow = ({ items, onOpen, slower }) => {
+  const duration = `${items.length * (slower ? 7 : 6)}s`;
+  return (
+    <div
+      className="works-row relative w-full overflow-hidden"
+      style={{
+        maskImage: "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+        WebkitMaskImage: "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+      }}
+    >
+      <ul className="works-track flex w-max py-3" style={{ "--works-duration": duration }}>
+        {[0, 1].map((copy) =>
+          items.map((product) => (
+            <li
+              key={`${copy}-${product.title}`}
+              aria-hidden={copy === 1 || undefined}
+              className="w-[280px] shrink-0 pr-6 sm:w-[340px] md:w-[380px] md:pr-8"
+            >
+              <ProductCard product={product} onOpen={() => onOpen(product)} inert={copy === 1} />
+            </li>
+          ))
+        )}
+      </ul>
+    </div>
   );
 };
 
@@ -106,12 +144,13 @@ export const Header = () => {
   );
 };
 
-export const ProductCard = ({ product, onOpen }) => {
+export const ProductCard = ({ product, onOpen, inert = false }) => {
   return (
-    <div className="group/product relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_24px_50px_-30px_rgba(11,31,58,0.35)] transition-all duration-500 hover:-translate-y-1.5 hover:border-navy-300 hover:shadow-[0_32px_60px_-28px_rgba(11,31,58,0.45)]">
+    <div className="group/product relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white shadow-[0_24px_50px_-30px_rgba(0,0,0,0.8)] transition-all duration-500 hover:-translate-y-1.5 hover:border-white hover:shadow-[0_32px_60px_-20px_rgba(255,255,255,0.25)]">
       {/* Opens an on-site preview — never navigates to the client's website */}
       <button
         type="button"
+        tabIndex={inert ? -1 : undefined}
         onClick={onOpen}
         aria-label={`Preview ${product.title}`}
         className="flex h-full w-full flex-col text-left"
@@ -125,6 +164,10 @@ export const ProductCard = ({ product, onOpen }) => {
 
         {/* Screenshot: always shown in full (object-contain); a blurred copy fills any spare space */}
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
+          {product.type === "app" ? (
+            <AppThumbnail product={product} />
+          ) : (
+          <>
           <img
             src={product.thumbnail}
             alt=""
@@ -142,6 +185,8 @@ export const ProductCard = ({ product, onOpen }) => {
             className="relative h-full w-full object-contain transition-transform duration-700 group-hover/product:scale-[1.03]"
             alt={product.title}
           />
+          </>
+          )}
           <span className="absolute inset-0 flex items-center justify-center bg-navy-900/0 opacity-0 transition-all duration-500 group-hover/product:bg-navy-900/40 group-hover/product:opacity-100">
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-navy-900 shadow-lg">
               <Maximize2 className="h-5 w-5" />
@@ -154,6 +199,11 @@ export const ProductCard = ({ product, onOpen }) => {
           <span className="truncate font-display text-[15px] font-semibold tracking-tight text-navy-900">
             {product.title}
           </span>
+          {product.type === "app" && (
+            <span className="ml-auto flex shrink-0 items-center gap-1.5 rounded-full border border-slate-200 px-2.5 py-1 text-[11px] font-semibold text-navy-700">
+              <PlayStoreLogo className="h-3.5 w-3.5" /> Google Play
+            </span>
+          )}
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-slate-200 text-navy-700 transition-all duration-300 group-hover/product:border-navy-900 group-hover/product:bg-navy-900 group-hover/product:text-white">
             <ArrowRight className="h-3.5 w-3.5" />
           </span>
@@ -214,7 +264,11 @@ const WorkPreview = ({ product, onClose }) => {
             </div>
 
             <div className="min-h-0 flex-1 overflow-auto bg-slate-100">
-              <img src={product.thumbnail} alt={product.title} className="mx-auto block h-auto w-full" />
+              {product.type === "app" ? (
+                <AppPreviewBody product={product} />
+              ) : (
+                <img src={product.thumbnail} alt={product.title} className="mx-auto block h-auto w-full" />
+              )}
             </div>
 
             <div className="flex flex-col items-start justify-between gap-3 border-t border-slate-200 px-5 py-4 sm:flex-row sm:items-center md:px-6">
@@ -229,3 +283,83 @@ const WorkPreview = ({ product, onClose }) => {
     </AnimatePresence>
   );
 };
+
+/* Google Play logo (decorative — the apps are shown, never linked). */
+export const PlayStoreLogo = ({ className = "h-5 w-5" }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+    <path fill="#4285F4" d="M3.61 1.81C3.24 2 3 2.4 3 2.9v18.2c0 .5.24.9.61 1.09L13.79 12 3.61 1.81z" />
+    <path fill="#34A853" d="M3.61 1.81 13.79 12l3.01-3.02L5.1 2.04c-.5-.29-1.07-.44-1.49-.23z" />
+    <path fill="#EA4335" d="M3.61 22.19c.42.21.99.06 1.49-.23l11.7-6.94L13.79 12 3.61 22.19z" />
+    <path fill="#FBBC04" d="M16.8 8.98 13.79 12l3.01 3.02 3.4-1.99c1.07-.63 1.07-1.43 0-2.06l-3.4-1.99z" />
+  </svg>
+);
+
+/* Non-clickable "Get it on Google Play" badge. */
+const PlayStoreBadge = () => (
+  <span className="inline-flex items-center gap-2.5 rounded-xl bg-black px-4 py-2 text-white">
+    <PlayStoreLogo className="h-6 w-6" />
+    <span className="flex flex-col leading-none">
+      <span className="text-[9px] font-medium uppercase tracking-wider">Get it on</span>
+      <span className="text-base font-semibold">Google Play</span>
+    </span>
+  </span>
+);
+
+/* Phone-framed screenshot. */
+const PhoneFrame = ({ src, alt, className = "" }) => (
+  <div className={`overflow-hidden rounded-[14px] border-[3px] border-navy-900 bg-navy-900 shadow-xl ${className}`}>
+    <img src={src} alt={alt} loading="lazy" decoding="async" className="block h-full w-full object-cover object-top" />
+  </div>
+);
+
+/* Card thumbnail for a mobile app: three fanned phone screenshots + the app icon. */
+const AppThumbnail = ({ product }) => {
+  const [a, b, c] = product.screenshots;
+  return (
+    <>
+      <img
+        src={product.thumbnail}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full scale-110 object-cover opacity-50 blur-2xl"
+      />
+      <div className="relative flex h-full w-full items-end justify-center gap-0 pt-5 transition-transform duration-700 group-hover/product:scale-[1.03]">
+        <PhoneFrame src={b} alt="" className="z-0 -mr-4 mb-3 aspect-[1/2] h-[72%] -rotate-6" />
+        <PhoneFrame src={a} alt={product.title} className="z-10 -mb-2 aspect-[1/2] h-[90%]" />
+        <PhoneFrame src={c} alt="" className="z-0 -ml-4 mb-3 aspect-[1/2] h-[72%] rotate-6" />
+      </div>
+      <img
+        src={product.icon}
+        alt=""
+        aria-hidden="true"
+        className="absolute left-3 top-3 z-20 h-11 w-11 rounded-xl shadow-md ring-2 ring-white"
+      />
+    </>
+  );
+};
+
+/* Modal body for a mobile app: icon, description, Play badge and all screenshots. */
+const AppPreviewBody = ({ product }) => (
+  <div className="p-5 md:p-8">
+    <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+      <img src={product.icon} alt={`${product.title} icon`} className="h-20 w-20 shrink-0 rounded-2xl shadow-md" />
+      <div className="min-w-0 flex-1">
+        <h4 className="font-display text-xl font-bold text-navy-900">{product.title}</h4>
+        <p className="mt-1 text-sm text-slate-600">{product.description}</p>
+      </div>
+      <PlayStoreBadge />
+    </div>
+    <div className="mt-6 flex gap-4 overflow-x-auto pb-2">
+      {product.screenshots.map((src, i) => (
+        <PhoneFrame
+          key={src}
+          src={src}
+          alt={`${product.title} screenshot ${i + 1}`}
+          className="aspect-[1/2] w-40 shrink-0 md:w-48"
+        />
+      ))}
+    </div>
+  </div>
+);
