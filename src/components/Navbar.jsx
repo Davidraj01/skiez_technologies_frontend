@@ -53,8 +53,9 @@ const Header = () => {
             />
           </span>
           {/* Company name: hidden only on tablets (md) where the full nav needs the room */}
-          <span className="truncate font-display text-base font-bold tracking-tight text-navy-900 sm:text-lg md:hidden lg:inline">
-            Skiez Technologies
+          <span className="truncate font-wordmark text-[1.2rem] font-medium min-[360px]:text-[1.35rem] leading-none tracking-[0.01em] sm:text-[1.55rem] md:hidden lg:inline">
+            <span className="text-[#1c6db4]">Skiez</span>{" "}
+            <span className="text-[#666666]">Technologies</span>
           </span>
         </Link>
 

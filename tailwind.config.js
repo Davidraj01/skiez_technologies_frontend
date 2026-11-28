@@ -73,6 +73,12 @@ export default {
   				'system-ui',
   				'sans-serif'
   			],
+  			wordmark: [
+  				'Rajdhani',
+  				'Inter',
+  				'system-ui',
+  				'sans-serif'
+  			],
   			display: [
   				'Plus Jakarta Sans',
   				'Inter',
